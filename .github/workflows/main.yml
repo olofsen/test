@@ -39,15 +39,15 @@ jobs:
           # Provide your app name, account name, and server to be deployed below
           SHINY_APP_NAME: ${{ secrets.SHINY_APP_NAME }}_test
         run: |
-          library(yaml)
-          shinyConfig <- list(
-            default = list(
-              title = 'test',
-              email_username = "${{ secrets.SHINY_CONFIG_EMAIL_USERNAME }}",
-              email_password = "${{ secrets.SHINY_CONFIG_EMAIL_PASSWORD }}"
-            )
-          )
-          write_yaml(shinyConfig, "config.yml", fileEncoding = "UTF-8")
+#          library(yaml)
+#          shinyConfig <- list(
+#            default = list(
+#              title = 'test',
+#              email_username = "${{ secrets.SHINY_CONFIG_EMAIL_USERNAME }}",
+#              email_password = "${{ secrets.SHINY_CONFIG_EMAIL_PASSWORD }}"
+#            )
+#          )
+#          write_yaml(shinyConfig, "config.yml", fileEncoding = "UTF-8")
           rsconnect::setAccountInfo("${{ secrets.SHINY_ACCOUNT }}", "${{ secrets.SHINY_TOKEN }}", "${{ secrets.SHINY_SECRET }}")
           rsconnect::deployApp(appName = "${{ env.SHINY_APP_NAME }}", account = "${{ secrets.SHINY_ACCOUNT }}", forceUpdate = TRUE)
         shell: Rscript {0}
